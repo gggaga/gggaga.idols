@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>逆先夏目 - Ensemble Stars!</title>
+  <style>
+    body {
+      background-color: #3c2e4d;
+      font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      color: #e0d4ff;
+      text-align: center;
+    }
+
+    .carousel-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .image-carousel {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      max-width: 90%;
+      padding-bottom: 10px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .image-carousel img {
+      width: 500px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      scroll-snap-align: start;
+    }
+
+    .arrow {
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .arrow:hover {
+      color: #ffd;
+    }
+
+    audio,
+    video {
+      display: block;
+      margin: 32px auto;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    figure {
+      margin: 32px auto;
+      text-align: center;
+    }
+
+    figure iframe {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      border: none;
+    }
+
+    figcaption,
+    a figcaption {
+      font-size: 22px;
+      color: #e0d4ff;
+      margin: 12px 0;
+      letter-spacing: 1px;
+    }
+
+    a figcaption {
+      font-size: 24px;
+      margin-top: 60px;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    a figcaption:hover {
+      color: #ffffff;
+    }
+
+    .avatar-chat-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      margin-top: 60px;
+      flex-wrap: wrap;
+    }
+
+    .avatar-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #my-avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    #my-avatar:hover {
+      transform: scale(1.05);
+    }
+
+    #click-hint {
+      font-size: 16px;
+      color: #f0f0f0;
+      margin-top: 12px;
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    #chat-box {
+      max-width: 600px;
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      text-align: left;
+      line-height: 1.6;
+      display: none;
+      color: #2e4057;
+      min-height: 120px;
+    }
+
+    .message {
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .image-carousel img {
+        width: 90vw;
+        height: auto;
+      }
+
+      audio,
+      video {
+        width: 90%;
+      }
+
+      figcaption,
+      a figcaption {
+        font-size: 16px;
+      }
+
+      #chat-box {
+        max-width: 90%;
+        font-size: 15px;
+      }
+
+      #my-avatar {
+        width: 120px;
+        height: 120px;
+      }
+
+      .carousel-wrapper {
+        flex-direction: column;
+      }
+
+      .arrow {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 輪播圖 -->
+  <div class="carousel-wrapper">
+    <button class="arrow left" onclick="scrollCarousel(-1)">←</button>
+    <div class="image-carousel" id="carousel">
+      <img src="IMG_5989.jpg" alt="逆先夏目1" />
+      <img src="IMG_8428.png" alt="逆先夏目2" />
+      <img src="IMG_8429.png" alt="逆先夏目3" />
+      <img src="IMG_8430.png" alt="逆先夏目4" />
+      <img src="IMG_8431.png" alt="逆先夏目5" />
+      <img src="IMG_8426.png" alt="逆先夏目６" />
+      <img src="IMG_1637.png" alt="逆先夏目７" />
+      <img src="IMG_3374.png" alt="逆先夏目８" />
+      
+    </div>
+    <button class="arrow right" onclick="scrollCarousel(1)">→</button>
+  </div>
+  <figcaption>逆先夏目</figcaption>
+
+  <!-- 音樂 -->
+  <figure>
+    <audio controls>
+      <source src="natsume-theme.mp3" />
+    </audio>
+    <figcaption>Magic Spell（假設曲名）</figcaption>
+  </figure>
+
+  <!-- YouTube影片 -->
+  <figure>
+    <iframe src="https://www.youtube.com/embed/some-video-id" 
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+    </iframe>
+    <figcaption>逆先夏目角色 MV（請換成實際影片連結）</figcaption>
+  </figure>
+
+  <!-- 對話角色圖與對話框 -->
+  <div class="avatar-chat-wrapper">
+    <div class="avatar-side">
+      <img id="my-avatar" src="IMG_8384.png" alt="我的角色圖" title="點我開始說話！" />
+      <p id="click-hint">點圖片 🗨️</p>
+    </div>
+    <div id="chat-box"></div>
+  </div>
+
+  <!-- 返回連結 -->
+  <a href="https://gggaga.github.io">
+    <figcaption>バック</figcaption>
+  </a>
+
+  <!-- JavaScript -->
+  <script>
+    const carousel = document.getElementById("carousel");
+    let isTransitioning = false;
+
+    function setupInfiniteCarousel() {
+      const images = Array.from(carousel.children);
+      const cloneCount = 2;
+
+      for (let i = 0; i < cloneCount; i++) {
+        const cloneFirst = images[i].cloneNode(true);
+        const cloneLast = images[images.length - 1 - i].cloneNode(true);
+        carousel.appendChild(cloneFirst);
+        carousel.insertBefore(cloneLast, carousel.firstChild);
+      }
+
+      requestAnimationFrame(() => {
+        const firstRealImage = carousel.children[cloneCount];
+        carousel.scrollLeft = firstRealImage.offsetLeft;
+      });
+    }
+
+    function scrollCarousel(direction) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      const itemWidth = carousel.children[0].offsetWidth + 12;
+      carousel.scrollBy({ left: direction * itemWidth, behavior: "smooth" });
+
+      setTimeout(() => {
+        const scrollLeft = carousel.scrollLeft;
+        const children = carousel.children;
+        const cloneCount = 2;
+        const firstReal = children[cloneCount];
+        const lastReal = children[children.length - cloneCount - 1];
+
+        if (scrollLeft >= lastReal.offsetLeft) {
+          carousel.scrollLeft = firstReal.offsetLeft;
+        }
+
+        if (scrollLeft <= children[cloneCount - 1].offsetLeft) {
+          carousel.scrollLeft = lastReal.offsetLeft;
+        }
+
+        isTransitioning = false;
+      }, 450);
+    }
+
+    setupInfiniteCarousel();
+
+    const messages = [
+      "フフッ、ボクの魔法の力……見せてあげるヨ♪",
+      "世界はボクの掌の中にアル。",
+      "……キミ、面白いね。もっとボクのこと、知りたくなった？",
+      "これは占いじゃない、未来視ダヨ。",
+      "さて……今日は何を引き寄せようカナ☆",
+      "逆先夏目、参上……よろしくネ？"
+    ];
+
+    let currentMsg = 0;
+    let charIndex = 0;
+    const chatBox = document.getElementById("chat-box");
+
+    function typeNextChar() {
+      const message = messages[currentMsg];
+      let currentLine = document.getElementById(`msg-${currentMsg}`);
+
+      if (!currentLine) {
+        currentLine = document.createElement("div");
+        currentLine.className = "message";
+        currentLine.id = `msg-${currentMsg}`;
+        chatBox.appendChild(currentLine);
+      }
+
+      currentLine.textContent += message[charIndex];
+      charIndex++;
+
+      if (charIndex < message.length) {
+        setTimeout(typeNextChar, 50);
+      } else {
+        charIndex = 0;
+        currentMsg++;
+        if (currentMsg < messages.length) {
+          setTimeout(typeNextChar, 1000);
+        }
+      }
+    }
+
+    document.getElementById("my-avatar").addEventListener("click", () => {
+      document.getElementById("my-avatar").style.pointerEvents = "none";
+      document.getElementById("click-hint").style.display = "none";
+      chatBox.style.display = "block";
+      typeNextChar();
+    });
+  </script>
+</body>
+</html>
